@@ -20,7 +20,7 @@ usage(){
 	echo -e "\t-o		... Attempt to fix Ownership issues"
 	echo -e "\t-g		... Clones GreenRomProject Overlay"
 	echo -e "\t-u		... Install/Update git"
-	echo -e "EXIT STATUSES"
+	echo -e "EXIT STATUSES check exit status after script exits: echo $?"
 	echo -e "0 = Success"
 	echo -e "1 = Oops root user detected ERROR"
 	echo -e "2 = Usage syntax ERROR"
@@ -35,12 +35,12 @@ do
 	   if [ $out = "1" ]; then
    		echo "A problem has arised while attempting to change ownership of the code @ /home/$USER/android/"
 		exit 3;;
-	g) mkdir -p /home/$USER/android/temp
-	   cd /home/$USER/android/temp
-	   git clone http://github.com/greenromproject/grp.git ###Currently doesn't exit yet
+	g) mkdir -p /home/$USER/.grptemp  #TODO may remove as this is the main action of the script
+	   cd /home/$USER/.grptemp
+	   git clone https://github.com/greenromproject/android_packages_apps_Protips.git
 	   out=$?
            if [ $out = "0" ]; then
-		echo "GRP repo has been cloned to /home/$USER/android/temp/"
+		echo "GRP repo has been cloned to hidden temp directory home/$USER/.grptemp"
 	     else
 		echo "Failed to clone repo"
 		echo "Exit Status $out"
@@ -50,10 +50,18 @@ do
 	esac
 done
 
-mkdir -p /home/$USER/android/temp
-cd /home/$USER/android/temp
-git clone http://github.com/greenromproject/grp.git ###Currently doesn't exit yet
-rm #CM's version of stuff we themed ;; this may be removed if cp --force works as it's help advertises
-cp -r #our stuff to the build directories ;; usage cp SOURCE DESTINATION
-rm -r /home/$USER/android/temp #clean up
+mkdir -p /home/$USER/.grptemp #hidden temp directory ;; deleted later
+cd /home/$USER/.grptemp
+
+#group all repo clones together and keep order for ref
+git clone https://github.com/greenromproject/android_packages_apps_Protips.git	#1 Protips
+
+#group all deletes together and keep order for ref
+rm -r /home/$USER/android/system/packages/apps/Protips	#1 Protips
+
+#group all copies together and keep order for ref
+cp -r /home/$USER/.grptemp /home/$USER/android/system/packages/apps/Protips #1 Protips
+
+rm -r /home/$USER/.grptemp #clean up
+
 exit 0
