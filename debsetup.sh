@@ -20,6 +20,12 @@ if [ $USER = "root" ]; then
 	#replace exit status to rc.local
 	sudo echo "exit 0" >> /etc/rc.local
 	
+	#Dependencies from http://source.android.com/source/download.html
+	sudo echo "Installing Dependencies..."	
+	sudo apt-get install git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev ia32-libs x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev
+	sudo echo "Done."
+
+
 
 
 ############################################
