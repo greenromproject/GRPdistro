@@ -55,12 +55,15 @@ cd /home/$USER/.grptemp
 
 #group all repo clones together and keep order for ref
 git clone https://github.com/greenromproject/android_packages_apps_Protips.git	#1 Protips
+git clone https://github.com/greenromproject/android_build.git #2 android_build
 
 #group all deletes together and keep order for ref
 rm -r /home/$USER/android/system/packages/apps/Protips	#1 Protips
+rm -r /home/$USER/android/system/build #2 android_build
 
 #group all copies together and keep order for ref
 cp -r /home/$USER/.grptemp /home/$USER/android/system/packages/apps/Protips #1 Protips
+cp -r /home/$USER/.grptemp /home/$USER/android/system/build #2 android_build
 
 rm -r /home/$USER/.grptemp #clean up
 
