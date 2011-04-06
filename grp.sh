@@ -63,8 +63,8 @@ rm -r /home/$USER/android/system/packages/apps/Protips	#1 Protips
 rm -r /home/$USER/android/system/build #2 android_build
 
 #group all copies together and keep order for ref
-cp -r /home/$USER/.grptemp /home/$USER/android/system/packages/apps/Protips #1 Protips
-cp -r /home/$USER/.grptemp /home/$USER/android/system/build #2 android_build
+cp -r /home/$USER/.grptemp/android_packages_apps_Protips/ /home/$USER/android/system/packages/apps/Protips #1 Protips
+cp -r /home/$USER/.grptemp/android_build /home/$USER/android/system/build #2 android_build
 
 rm -fr /home/$USER/.grptemp #clean up
 
