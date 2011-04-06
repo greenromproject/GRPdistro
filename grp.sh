@@ -73,7 +73,7 @@ cp -r $grptemp/android_packages_apps_Protips/ $buildpath/packages/apps/Protips #
 cp -r $grptemp/android_build $buildpath/build #2 android_build
 
 #clean up
-chmod -R 777 $grptemp #pervents read/write protection permission prompts
+chmod -R 777 $grptemp #prevents read/write protection permission prompts
 rm -fr $grptemp
 
 exit 0
