@@ -34,7 +34,8 @@ do
 	   out=$?
 	   if [ $out = "1" ]; then
    		echo "A problem has arised while attempting to change ownership of the code @ /home/$USER/android/"
-		exit 3;;
+	   fi
+		exit 3 ;;
 	g) mkdir -p /home/$USER/.grptemp  #TODO may remove as this is the main action of the script
 	   cd /home/$USER/.grptemp
 	   git clone https://github.com/greenromproject/android_packages_apps_Protips.git
@@ -44,7 +45,7 @@ do
 	     else
 		echo "Failed to clone repo"
 		echo "Exit Status $out"
-	   fi
+	   fi ;;
 	u) sudo apt-get install git ;;
 	*) usage ; exit 2 ;;
 	esac
@@ -65,6 +66,6 @@ rm -r /home/$USER/android/system/build #2 android_build
 cp -r /home/$USER/.grptemp /home/$USER/android/system/packages/apps/Protips #1 Protips
 cp -r /home/$USER/.grptemp /home/$USER/android/system/build #2 android_build
 
-rm -r /home/$USER/.grptemp #clean up
+rm -fr /home/$USER/.grptemp #clean up
 
 exit 0
