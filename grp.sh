@@ -59,18 +59,18 @@ cd $grptemp
 
 #group all repo clones together and keep order for ref
 git clone https://github.com/greenromproject/android_packages_apps_Protips.git	#1 Protips
-git clone https://github.com/greenromproject/android_build.git #2 android_build
+git clone https://github.com/greenromproject/android_system_core.git #2 android_system_core
 
 
 chmod -R 777 $buildpath #prevents read/write protection permission prompts
 
 #group all deletes together and keep order for ref
 rm -r $buildpath/packages/apps/Protips	#1 Protips
-rm -r $buildpath/build #2 android_build
+rm -r $buildpath/system/core #2 android_system_core
 
 #group all copies together and keep order for ref
 cp -r $grptemp/android_packages_apps_Protips/ $buildpath/packages/apps/Protips #1 Protips
-cp -r $grptemp/android_build $buildpath/build #2 android_build
+cp -r $grptemp/android_system_core $buildpath/system/core #2 android_system_core
 
 #clean up
 chmod -R 777 $grptemp #prevents read/write protection permission prompts
