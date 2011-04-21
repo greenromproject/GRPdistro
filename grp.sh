@@ -28,6 +28,7 @@ usage(){
 	echo -e "1 = Oops root user detected ERROR"
 	echo -e "2 = Usage syntax ERROR"
 	echo -e "3 = chown ownership fix failed"
+	echo -e "4 = No useage MUST HAVE ARGUMENT see grp.sh --help"
 }
 while getopts "ovgu" opt
 do
@@ -42,11 +43,24 @@ do
 		exit 3 ;;
 	g) mkdir -p $devpath
 	   cd $devpath
+	   #avoid ownership and permission issues
+	   sudo chmod -R 777 $buildpath
+	   sudo chown -R $SUDO_USER:$SUDO_USER $devpath
+	   #remove old source so git clone does not complain about existing repos
+								#KEEP ME IN ORDER
+	   rm -r $devpath/android_packages_apps_Protips		#1 Protips
+	   rm -r $devpath/android_vendor_greenromproject	#2 GRP Overlay
+	   rm -r $devpath/android_device_motorola_sholes	#3 motorola sholes overlay
+	   rm -r $devpath/android_build				#4 build system
+	   rm -r $devpath/android_device_htc_glacier		#5 htc glacier overlay
+	   rm -r $devpath/android_frameworks_base		#6 frameworks/base
+	   #get new code for dev
 	   git clone https://github.com/greenromproject/android_packages_apps_Protips.git	#1 Protips
-	   git clone https://github.com/greenromproject/android_vendor_greenromproject.git #2 grp overlay
-	   git clone https://github.com/greenromproject/android_device_motorola_sholes.git #3 motorola sholes overlay
-	   git clone https://github.com/greenromproject/android_build.git #4 build system
-	   git clone https://github.com/greenromproject/android_device_htc_glacier.git  #5 htc glacier overlay
+	   git clone https://github.com/greenromproject/android_vendor_greenromproject.git 	#2 grp overlay
+	   git clone https://github.com/greenromproject/android_device_motorola_sholes.git 	#3 motorola sholes overlay
+	   git clone https://github.com/greenromproject/android_build.git 			#4 build system
+	   git clone https://github.com/greenromproject/android_device_htc_glacier.git		#5 htc glacier overlay
+	   git clone https://github.com/greenromproject/android_frameworks_base.git 		#6 Frameworks/base
 	   out=$?
            if [ $out = "0" ]; then
 		echo "GRP repo has been cloned to hidden temp directory $grptemp"
@@ -58,7 +72,11 @@ do
 	*) usage ; exit 2 ;;
 	esac
 done
-
+STOP="true"
+if [ "$STOP" = "true" ]; then
+	echo -e "\nThis part of the script has outlived its usefullness the useage -g is VERY helpful to keep up with GRP developement\n\n\n For more information try grp.sh --help"
+	exit 4
+  else
 mkdir -p $grptemp #hidden temp directory ;; deleted later
 cd $grptemp
 
@@ -90,3 +108,4 @@ chmod -R 777 $grptemp #prevents read/write protection permission prompts
 rm -fr $grptemp
 
 exit 0
+fi
