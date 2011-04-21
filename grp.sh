@@ -23,7 +23,7 @@ usage(){
 	echo -e "\t-o		... Attempt to fix Ownership issues"
 	echo -e "\t-g		... Clones GreenRomProject Overlay to $devpath"
 	echo -e "\t-u		... Install/Update git\n\n"
-	echo -e "EXIT STATUSES check exit status after script exits: echo $?"
+	echo -e "EXIT STATUSES check exit status after script exits: echo \$?"
 	echo -e "0 = Success"
 	echo -e "1 = Oops root user detected ERROR"
 	echo -e "2 = Usage syntax ERROR"
