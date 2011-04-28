@@ -44,7 +44,7 @@ do
 	g) mkdir -p $devpath
 	   cd $devpath
 	   #avoid ownership and permission issues
-	   sudo chmod -R 777 $buildpath
+	   sudo chmod -fR 777 $buildpath
 	   sudo chown -R $SUDO_USER:$SUDO_USER $devpath
 	   #remove old source so git clone does not complain about existing repos
 								#KEEP ME IN ORDER
@@ -54,6 +54,8 @@ do
 	   rm -r $devpath/android_build				#4 build system
 	   rm -r $devpath/android_device_htc_glacier		#5 htc glacier overlay
 	   rm -r $devpath/android_frameworks_base		#6 frameworks/base
+	   rm -r $devpath/GRPmanifest				#7 GRPmanifest
+	   rm -r $devpath/GRPdistro				#8 GRPdistro
 	   #get new code for dev
 	   git clone https://github.com/greenromproject/android_packages_apps_Protips.git	#1 Protips
 	   git clone https://github.com/greenromproject/android_vendor_greenromproject.git 	#2 grp overlay
@@ -61,6 +63,8 @@ do
 	   git clone https://github.com/greenromproject/android_build.git 			#4 build system
 	   git clone https://github.com/greenromproject/android_device_htc_glacier.git		#5 htc glacier overlay
 	   git clone https://github.com/greenromproject/android_frameworks_base.git 		#6 Frameworks/base
+	   git clone https://github.com/greenromproject/GRPmanifest.git				#7 GRPmanifest
+	   git clone https://github.com/greenromproject/GRPdistro.git				#8 GRPdistro
 	   out=$?
            if [ $out = "0" ]; then
 		echo "GRP repo has been cloned to hidden temp directory $grptemp"
